@@ -1,9 +1,31 @@
 from logging.config import fileConfig
+import os
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
+from dotenv import load_dotenv
+from sqlalchemy import engine_from_config, pool, URL, make_url
 from alembic import context
+
+load_dotenv()
+
+
+WOWR_POSTGRES_HOSTNAME=os.environ["WOWR_POSTGRES_HOSTNAME"]
+WOWR_POSTGRES_PORT=os.environ["WOWR_POSTGRES_PORT"]
+WOWR_POSTGRES_DB=os.environ["WOWR_POSTGRES_DB"]
+WOWR_POSTGRES_USER=os.environ["WOWR_POSTGRES_USER"]
+WOWR_POSTGRES_PASSWORD=os.environ["WOWR_POSTGRES_PASSWORD"]
+
+DB_URL = (
+    "postgresql://"
+    + WOWR_POSTGRES_USER
+    + ":"
+    + WOWR_POSTGRES_PASSWORD
+    + "@"
+    + WOWR_POSTGRES_HOSTNAME
+    + ":"
+    + WOWR_POSTGRES_PORT
+    + "/"
+    + WOWR_POSTGRES_DB
+)
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -24,6 +46,8 @@ target_metadata = None
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+config.set_main_option("sqlalchemy.url", DB_URL)
 
 
 def run_migrations_offline() -> None:
