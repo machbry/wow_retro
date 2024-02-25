@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: postgres_wowr
+    environment:
+      HOSTNAME: postgres_wowr
+      POSTGRES_DB: wowr_db
+      POSTGRES_PASSWORD: wowr
+      POSTGRES_USER: wowr_user
+    image: postgres
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    volumes:
+      - ./data/postgres:/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
