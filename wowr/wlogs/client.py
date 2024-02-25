@@ -4,8 +4,8 @@ from typing import Any
 
 import requests
 
-from src.logger import get_logger
-from src.constants import WLOGS_CLIENT_ID, WLOGS_CLIENT_SECRET, WLOGS_TOKEN_URL, WLOGS_AUTHORIZE_URL, \
+from wowr.logger import get_logger
+from wowr.constants import WLOGS_CLIENT_ID, WLOGS_CLIENT_SECRET, WLOGS_TOKEN_URL, WLOGS_AUTHORIZE_URL, \
     WLOG_AUTH_FLOW_DATA
 
 log = get_logger()

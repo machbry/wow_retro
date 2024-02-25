@@ -1,4 +1,4 @@
-from src.wlogs.client import GraphQLClient
+from wowr.wlogs.client import GraphQLClient
 
 
 def post_query(query_func):

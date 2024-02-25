@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "src"
+name = "wowr"
 version = "0.1.0"
 description = "Gather data from years of raiding in wow and share it to guild members !"
 authors = ["mchambery <matthieu.chambery@gmail.com>"]
@@ -8,14 +8,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pandas = "^2.2.1"
-requests = "^2.31.0"
-python-dotenv = "^1.0.1"
-dagster = "^1.6.6"
-dagster-webserver = "^1.6.6"
+pandas = "2.2.1"
+requests = "2.31.0"
+python-dotenv = "1.0.1"
+dagster = "1.6.6"
+dagster-webserver = "1.6.6"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.0.1"
+pytest = "8.0.1"
 
 [build-system]
 requires = ["poetry-core"]
