@@ -4,11 +4,11 @@ from typing import Any
 
 import requests
 
-from src.logger import Logger
+from src.logger import get_logger
 from src.constants import WLOGS_CLIENT_ID, WLOGS_CLIENT_SECRET, WLOGS_TOKEN_URL, WLOGS_AUTHORIZE_URL, \
     WLOG_AUTH_FLOW_DATA
 
-logger = Logger().get()
+log = get_logger()
 
 
 @dataclass
@@ -21,24 +21,24 @@ class GraphQLClient:
     access_token: str = ""
 
     def _init_access_token(self):
-        logger.debug(f"Token request for client {self.client_id} at {self.token_url}.")
+        log.debug(f"Token request for client {self.client_id} at {self.token_url}.")
         response = requests.post(url=self.token_url,
                                  data=self.auth_flow_data,
                                  auth=(self.client_id, self.client_secret))
         try:
             self.access_token = response.json()['access_token']
         except KeyError:
-            logger.exception("Access token not retrieved.")
+            log.exception("Access token not retrieved.")
             raise
         else:
-            logger.info("Access token retrieved.")
+            log.info("Access token retrieved.")
         self._headers = {'Authorization': 'Bearer ' + self.access_token}
 
     def post(self, query: str) -> Any:
         if not self.access_token:
             self._init_access_token()
 
-        logger.debug(f"Query request: {query}")
+        log.debug(f"Query request: {query}")
         response = requests.get(self.authorize_url,
                                 headers=self._headers,
                                 json={'query': query})

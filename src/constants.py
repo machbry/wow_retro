@@ -4,6 +4,8 @@ from pathlib import Path
 
 load_dotenv()
 
+LOGGER_NAME = "wowretro"
+
 WOW_RETRO_SRC_PATH = Path(__name__).parent
 WOW_RETRO_CONF_LOGS_PATH = WOW_RETRO_SRC_PATH / "conf/logs.yaml"
 

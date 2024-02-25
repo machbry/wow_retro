@@ -3,7 +3,7 @@ from logging.config import dictConfig
 import yaml
 from pathlib import Path
 
-from constants import WOW_RETRO_CONF_LOGS_PATH
+from constants import LOGGER_NAME, WOW_RETRO_CONF_LOGS_PATH
 
 
 def logging_config_from_yaml(path: Path = WOW_RETRO_CONF_LOGS_PATH) -> dict:
@@ -11,12 +11,10 @@ def logging_config_from_yaml(path: Path = WOW_RETRO_CONF_LOGS_PATH) -> dict:
         return yaml.safe_load(f.read())
 
 
-class Logger:
-    def __init__(self):
-        config = logging_config_from_yaml()
-        dictConfig(config)
-        self._logger = logging.getLogger(name='wowretro')
+def init_logger():
+    config = logging_config_from_yaml()
+    dictConfig(config)
 
-    def get(self):
-        return self._logger
-    
+
+def get_logger():
+    return logging.getLogger(name=LOGGER_NAME)
