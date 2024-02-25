@@ -1,14 +1,3 @@
-from wowr.wlogs.client import GraphQLClient
-
-
-def post_query(query_func):
-    def query_arguments_wrapper(*args, **kwargs):
-        client = GraphQLClient()
-        return client.post(query_func(*args, **kwargs))
-    return query_arguments_wrapper
-
-
-@post_query
 def query_item(id: int) -> str:
     query = "query {" +\
                 "gameData{" +\
@@ -18,7 +7,6 @@ def query_item(id: int) -> str:
     return query
 
 
-@post_query
 def query_game_zones_on_page(page: int) -> str:
     query = "query {" +\
                 "gameData{" +\
@@ -36,7 +24,6 @@ def query_game_zones_on_page(page: int) -> str:
     return query
 
 
-@post_query
 def query_game_specs(zone_id: int) -> str:
     query = "query {" +\
                 "gameData{" +\
@@ -49,7 +36,6 @@ def query_game_specs(zone_id: int) -> str:
     return query
 
 
-@post_query
 def query_reports_on_page(guild_id: int, page: int) -> str:
     query = "query " +\
                 "{reportData " +\
@@ -72,7 +58,6 @@ def query_reports_on_page(guild_id: int, page: int) -> str:
     return query
 
 
-@post_query
 def query_report(code: str, actor_type="Player") -> str:
     query = "query " +\
                 "{reportData " +\

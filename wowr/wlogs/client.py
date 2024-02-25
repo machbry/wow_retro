@@ -20,7 +20,7 @@ class GraphQLClient:
     auth_flow_data = WLOG_AUTH_FLOW_DATA
     access_token: str = ""
 
-    def _init_access_token(self):
+    def get_access_token(self):
         log.debug(f"Token request for client {self.client_id} at {self.token_url}.")
         response = requests.post(url=self.token_url,
                                  data=self.auth_flow_data,
@@ -35,12 +35,21 @@ class GraphQLClient:
         self._headers = {'Authorization': 'Bearer ' + self.access_token}
 
     def post(self, query: str) -> Any:
-        if not self.access_token:
-            self._init_access_token()
-
         log.debug(f"Query request: {query}")
         response = requests.get(self.authorize_url,
                                 headers=self._headers,
                                 json={'query': query})
         return json.loads(response.text)
+    
+
+class GraphQLSession:
+    def __init__(self):
+        self.client = GraphQLClient()
+
+    def __enter__(self):
+        self.client.get_access_token()
+        return self.client
+    
+    def __exit__(self, *args, **kwargs):
+        pass
     
