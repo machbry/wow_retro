@@ -1,4 +1,4 @@
-from logger import init_logger, get_logger
+from wowr.logger import init_logger, get_logger
 
 
 init_logger()
