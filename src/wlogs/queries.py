@@ -1,12 +1,10 @@
 from src.wlogs.client import GraphQLClient
 
 
-CLIENT = GraphQLClient()
-
-
 def post_query(query_func):
     def query_arguments_wrapper(*args, **kwargs):
-        return CLIENT.post(query_func(*args, **kwargs))
+        client = GraphQLClient()
+        return client.post(query_func(*args, **kwargs))
     return query_arguments_wrapper
 
 
