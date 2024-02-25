@@ -1,8 +1,6 @@
 import os
-from dotenv import load_dotenv
 from pathlib import Path
 
-load_dotenv()
 
 WOWR_CONF_DIRECTORY_PATH = Path(os.environ["WOWR_CONF_DIRECTORY_PATH"]).resolve()
 WOWR_CONF_LOGS_PATH = WOWR_CONF_DIRECTORY_PATH / "logs.yaml"
